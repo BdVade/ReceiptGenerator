@@ -25,7 +25,7 @@ class GetReceiptsViewSet(viewsets.ViewSet):
 
 
 class ListCreateUserReceipts(APIView):
-    permission_classes = permissions.IsAuthenticated
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def get(self, request):
         query_set = Receipt.objects.filter(user=request.user)

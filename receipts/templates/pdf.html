@@ -1,0 +1,41 @@
+<html>
+<body>
+ <h1>{{ receipt.user.username  }}</h1>
+ <p>
+ Receipt no. RCPT0{{ receipt.id }}<br>
+ <span class="secondary">
+ {{ receipt.created_at|date:"M d, Y" }}
+ </span>
+ </p>
+ <h3>Bill to</h3>
+ <p>
+     {{ receipt.name }} <br>
+ {{ receipt.address }}<br>
+ {{ receipt.phone_number }}<br>
+
+ </p>
+ <h3>Items bought</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Service Description</th>
+ <th>Amount Payable</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr class="row{% cycle "1" "2" %}">
+ <td>{{ receipt.description }}</td>
+ <td class="num">${{ receipt.amount }}</td>
+
+ </tr>
+ <tr class="total">
+ <td colspan="3">Total</td>
+ <td class="num">${{ receipt.amount }}</td>
+ </tr>
+ </tbody>
+ </table>
+
+ <span class="paid">
+ </span>
+</body>
+</html>

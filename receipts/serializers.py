@@ -19,4 +19,4 @@ class ReceiptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Receipt
-        fields = "__all__"
+        fields = ['amount', 'name', 'address', 'phone_number', 'files', 'description']
