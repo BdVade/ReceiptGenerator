@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -24,4 +25,4 @@ def file_upload(instance, filename):
 
 class ReceiptFile(models.Model):
     receipt = models.ForeignKey(Receipt, on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to=file_upload)
+    file = models.FileField()

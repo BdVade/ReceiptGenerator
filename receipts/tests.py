@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
 from users.models import User
+from .models import ReceiptFile
 
 
 # Create your tests here.
@@ -23,5 +24,18 @@ class ReceiptsTest(APITestCase):
         data = {'name': 'Test User', 'amount': 300.00, 'address': 'Test Address', 'phone_number': '080123456789',
                 'description': 'Test Description'}
         response = self.client.post(url, data)
-        print(response.json())
+        files = ReceiptFile.objects.count()
         self.assertEqual(response.status_code, 201)
+        self.assertEqual(10, files)
+
+    def test_user_receipt_list(self):
+        """
+        Ensure the request to get list of users receipts works correctly
+        """
+        url = reverse('create_and_list_user_receipts')
+        response = self.client.get(url)
+        length = len(response.json().get('data'))
+        self.assertEqual(response.status_code, 200)
+
+
+
