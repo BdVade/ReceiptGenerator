@@ -153,5 +153,4 @@ AUTH_USER_MODEL = 'users.User'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-
 django_heroku.settings(locals())
