@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -153,3 +154,4 @@ AUTH_USER_MODEL = 'users.User'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
+django_heroku.settings(locals())

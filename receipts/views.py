@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import authentication, permissions
 from .models import Receipt
-from .serializers import ReceiptSerializer, ReceiptFileSerializer
+from .serializers import ReceiptSerializer, ReceiptFileSerializer, ReceiptListSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
@@ -21,9 +21,13 @@ class GetReceiptsViewSet(viewsets.ViewSet):
         return Response({"status": status.HTTP_200_OK, "data": serializer.data}, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk):
-        queryset = Receipt.objects.all()
-        receipt = get_object_or_404(queryset, pk=pk)
-        serializer = ReceiptSerializer
+        try:
+            receipt = Receipt.objects.get(pk=pk)
+        except Receipt.DoesNotExist:
+            return Response({"status": status.HTTP_404_NOT_FOUND, "data": 'Receipt Doed not exist'},
+                            status=status.HTTP_404_NOT_FOUND)
+        serializer = ReceiptSerializer(receipt)
+        return Response({"status": status.HTTP_200_OK, "data": serializer.data}, status=status.HTTP_200_OK)
 
 
 class ListCreateUserReceipts(APIView):
@@ -32,16 +36,13 @@ class ListCreateUserReceipts(APIView):
 
     def get(self, request):
         query_set = Receipt.objects.filter(user=request.user)
-        serializer = ReceiptSerializer(instance=query_set, many=True)
+        serializer = ReceiptListSerializer(instance=query_set, many=True)
         return Response({"status": status.HTTP_200_OK, "data": serializer.data}, status=status.HTTP_200_OK)
 
-
-    name = 
-
-    @swagger_auto_schema(manual_parameters=[])
+    @swagger_auto_schema(request_body=ReceiptSerializer)
     def post(self, request):
-        serializer = ReceiptSerializer(data=request.POST)
+        serializer = ReceiptSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=request.user)
-        return Response({"status": status.HTTP_201_CREATED, "data": "Receipt created Successfully"},
+        return Response({"status": status.HTTP_201_CREATED, "data": serializer.data},
                         status=status.HTTP_201_CREATED)

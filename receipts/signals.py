@@ -12,7 +12,7 @@ def create_pdfs(sender, instance, created, **kwargs):
     html = weasyprint.HTML(string=html)
     for i in range(10):
         pdf = ContentFile(html.write_pdf(stylesheets=[weasyprint.CSS(
-            settings.STATIC_ROOT + 'css/pdf.css')]), name=f'rcpt-{instance.id}')
+            settings.STATIC_ROOT + '/css/pdf.css')]), name=f'rcpt-{instance.id}')
         ReceiptFile.objects.create(receipt=instance, file=pdf)
 
 
