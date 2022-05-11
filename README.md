@@ -25,4 +25,4 @@ This project is deployed [here](https://receipt-makr.herokuapp.com/)
 
 and  documented [here](https://documenter.getpostman.com/view/15225360/Uyr4KLLS)
 
-testing credentials: username --> Vade,  password --> VadePass
+testing credentials: username --> Vade,  password --> VadePass (Lost the Vibe to set up auth endpoints😂😭. Add it and make a PR maybe?👀)
