@@ -5,6 +5,7 @@
 
 ## Setup
 Follow [this link](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html) to set up your computer for weasy print
+
 set up a [virtual environnment](https://realpython.com/python-virtual-environments-a-primer/)
 
 run the following
