@@ -12,6 +12,8 @@ run the following
 
 ```pip install -r requirements.txt``` to install the packages
 
+Create a `.env` file in the base directory follow the `.env.example` file and add your Cloudinary details
+
 ```
 python manage.py makemigrations
 ```
